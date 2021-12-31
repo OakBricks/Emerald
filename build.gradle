@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'org.oakbricks'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://oss.sonatype.org/content/groups/public/'}
+}
+
+dependencies {
+    // why are we using json?
+    implementation 'com.github.cliftonlabs:json-simple:4.0.0'
+    // logging
+    implementation 'org.tinylog:tinylog-api:2.4.1'
+    implementation 'org.tinylog:tinylog-impl:2.4.1'
+    implementation 'org.tinylog:slf4j-tinylog:2.4.1'
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    // When the launcher uses command-line arguments
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'net.sf.jopt-simple:jopt-simple:6.0-alpha-3'
+    // Lombok lmao
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    // we try to get this working
+    implementation 'org.to2mbn:jmccc:2.5-beta-1'
+    // Dark and light mode
+    implementation 'com.github.weisj:darklaf-core:2.7.3'
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
+}
