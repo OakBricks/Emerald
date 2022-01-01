@@ -9,13 +9,16 @@ import org.oakbricks.launcher.gui.GuiMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.UUID;
 
 public class Main {
     public static boolean IS_DEBUGGING = false;
     public static final Logger LOGGER = LoggerFactory.getLogger("Launcher");
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, ScriptException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         LafManager.install();
         LafManager.installTheme(LafManager.getPreferredThemeStyle());
@@ -35,5 +38,9 @@ public class Main {
         }
         guiThread.start();
         LOGGER.debug("\n"+gson.toJson(new InstanceJsonTemplate(UUID.randomUUID(), "Testing Instance", InstanceJsonTemplate.ActionTypes.NONE, "", InstanceJsonTemplate.ActionTypes.LUA, "")));
+        ScriptEngineManager factory = new ScriptEngineManager();
+        ScriptEngine engine = factory.getEngineByName("nashorn");
+        engine.put("logger", LOGGER);
+        engine.eval("logger.info(\"testing\")");
     }
 }
