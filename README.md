@@ -14,4 +14,8 @@ To be honest, idk
 - [ ] Accounts/Mangement/GUI
 - [ ] Instances
 
+# Other neat features
+- [ ] Scripting for events, such as launching an instance and closing an instance (maybe using jLua or Jython)
+- [ ] Instance wrapper (so shit like PackWiz would work)
+
 ###### made using intellijank
