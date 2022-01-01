@@ -13,7 +13,8 @@ repositories {
 
 dependencies {
     // why are we using json?
-    implementation 'com.github.cliftonlabs:json-simple:4.0.0'
+    // for instances and configs, bozo
+    implementation 'com.google.code.gson:gson:2.8.9'
     // logging
     implementation 'org.tinylog:tinylog-api:2.4.1'
     implementation 'org.tinylog:tinylog-impl:2.4.1'
@@ -31,8 +32,8 @@ dependencies {
     implementation 'com.github.weisj:darklaf-core:2.7.3'
 }
 
-gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:unchecked"
-    }
-}
+//gradle.projectsEvaluated {
+//    tasks.withType(JavaCompile) {
+//        options.compilerArgs << "-Xlint:unchecked"
+//    }
+//}
