@@ -31,9 +31,3 @@ dependencies {
     // Dark and light mode
     implementation 'com.github.weisj:darklaf-core:2.7.3'
 }
-
-//gradle.projectsEvaluated {
-//    tasks.withType(JavaCompile) {
-//        options.compilerArgs << "-Xlint:unchecked"
-//    }
-//}
