@@ -29,8 +29,6 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
 
     @Override
     public void run() {
-        LafManager.install();
-        LafManager.installTheme(LafManager.getPreferredThemeStyle());
         instancesPanel = new JPanel();
 
         toolBar = new JToolBar();

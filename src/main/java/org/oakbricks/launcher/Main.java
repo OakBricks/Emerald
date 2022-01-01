@@ -1,23 +1,18 @@
 package org.oakbricks.launcher;
 
+import com.github.weisj.darklaf.LafManager;
 import org.apache.commons.cli.*;
 import org.oakbricks.launcher.gui.GuiMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static boolean IS_DEBUGGING = false;
     public static final Logger LOGGER = LoggerFactory.getLogger("Launcher");
 
     public static void main(String[] args) throws ParseException {
+        LafManager.install();
+        LafManager.installTheme(LafManager.getPreferredThemeStyle());
         GuiMain guiThreadObj = new GuiMain();
         Thread guiThread = new Thread(guiThreadObj);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Shutting down launcher!")));
