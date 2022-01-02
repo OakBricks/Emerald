@@ -4,16 +4,11 @@ import com.github.weisj.darklaf.LafManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
-import org.oakbricks.launcher.core.json.AccountsJson;
-import org.oakbricks.launcher.core.json.InstanceJsonTemplate;
 import org.oakbricks.launcher.gui.GuiMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.util.UUID;
 
 public class Main {
     public static boolean IS_DEBUGGING = false;

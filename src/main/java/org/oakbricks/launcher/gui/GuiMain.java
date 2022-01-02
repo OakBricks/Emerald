@@ -1,6 +1,5 @@
 package org.oakbricks.launcher.gui;
 
-import com.github.weisj.darklaf.LafManager;
 import org.oakbricks.launcher.Main;
 import org.oakbricks.launcher.gui.tools.AccountManagementFrame;
 import org.oakbricks.launcher.gui.tools.DebuggingFrame;

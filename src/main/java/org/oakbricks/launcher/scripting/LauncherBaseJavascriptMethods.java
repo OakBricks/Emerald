@@ -1,12 +1,10 @@
 package org.oakbricks.launcher.scripting;
 
 import org.oakbricks.launcher.Main;
-import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 

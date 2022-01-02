@@ -3,9 +3,6 @@ package org.oakbricks.launcher.gui.tools;
 import org.oakbricks.launcher.Main;
 import org.oakbricks.launcher.scripting.LauncherBaseJavascriptMethods;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

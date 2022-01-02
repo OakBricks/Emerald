@@ -4,7 +4,6 @@ import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
 import org.oakbricks.launcher.core.json.AccountsJson;
-import org.tinylog.Logger;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
