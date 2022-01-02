@@ -10,8 +10,8 @@ To be honest, idk
 # What is complete
 - [x] GUI
 - [ ] Launching
-- [ ] Accounts/Auth
-- [ ] Accounts/Mangement/GUI
+- [x] Accounts/Auth
+- [x] Accounts/Mangement/GUI
 - [ ] Instances
 
 # Other neat features

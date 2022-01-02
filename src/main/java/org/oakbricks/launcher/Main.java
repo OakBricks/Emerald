@@ -4,6 +4,7 @@ import com.github.weisj.darklaf.LafManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
+import org.oakbricks.launcher.core.json.AccountsJson;
 import org.oakbricks.launcher.core.json.InstanceJsonTemplate;
 import org.oakbricks.launcher.gui.GuiMain;
 import org.slf4j.Logger;
@@ -35,12 +36,8 @@ public class Main {
         if (commandLine.hasOption("EnableLauncherDebugging")) {
             IS_DEBUGGING = true;
             LOGGER.debug("DEBUGGING ENABLED");
+            //LOGGER.debug("\n"+gson.toJson(new InstanceJsonTemplate(UUID.randomUUID(), "Testing Instance", InstanceJsonTemplate.ActionTypes.NONE, "", InstanceJsonTemplate.ActionTypes.JAVASCRIPT, "")));
         }
         guiThread.start();
-        LOGGER.debug("\n"+gson.toJson(new InstanceJsonTemplate(UUID.randomUUID(), "Testing Instance", InstanceJsonTemplate.ActionTypes.NONE, "", InstanceJsonTemplate.ActionTypes.LUA, "")));
-        ScriptEngineManager factory = new ScriptEngineManager();
-        ScriptEngine engine = factory.getEngineByName("nashorn");
-        engine.put("logger", LOGGER);
-        engine.eval("logger.info(\"testing\")");
     }
 }

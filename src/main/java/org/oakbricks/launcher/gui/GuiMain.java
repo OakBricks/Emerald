@@ -2,6 +2,7 @@ package org.oakbricks.launcher.gui;
 
 import com.github.weisj.darklaf.LafManager;
 import org.oakbricks.launcher.Main;
+import org.oakbricks.launcher.gui.tools.AccountManagementFrame;
 import org.oakbricks.launcher.gui.tools.DebuggingFrame;
 import org.oakbricks.launcher.gui.tools.InstanceManager;
 
@@ -42,6 +43,7 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
 
         debugButton = new JButton("Debugging", debuggingIcon);
         debugButton.addActionListener(this);
+        new JOptionPane();
 
         toolBar.add(instancesButton);
         toolBar.add(accountsButton);
@@ -66,6 +68,7 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
             new InstanceManager();
         } else if (e.getSource() == accountsButton) {
             LOGGER.info("Development placeholder");
+            new Thread(new AccountManagementFrame()).start();
         } else if (e.getSource() == debugButton && Main.IS_DEBUGGING) {
             new DebuggingFrame();
         }

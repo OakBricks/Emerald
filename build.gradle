@@ -9,6 +9,7 @@ repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
     maven { url 'https://oss.sonatype.org/content/groups/public/'}
+    maven { url 'https://repo.panda-lang.org/releases'}
 }
 
 dependencies {
@@ -27,9 +28,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     // we try to get this working
-    implementation 'org.to2mbn:jmccc:2.5-beta-1'
+    implementation files("libs/openauth-1.1.2.jar", "libs/openauth-1.1.2-sources.jar", "libs/openauth-1.1.2-javadoc.jar", "libs/openlauncherlib-3.0.5.jar")
     // Dark and light mode
     implementation 'com.github.weisj:darklaf-core:2.7.3'
     // scripting
     implementation 'org.openjdk.nashorn:nashorn-core:15.3'
+    implementation 'org.luaj:luaj-jse:3.0.1'
+    implementation 'org.panda-lang:pandomium:1.1.4-JCEF-v1.0.10-84.3.8+gc8a556f+chromium-84.0.4147.105'
 }

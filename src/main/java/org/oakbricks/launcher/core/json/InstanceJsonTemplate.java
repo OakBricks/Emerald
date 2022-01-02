@@ -24,7 +24,6 @@ public class InstanceJsonTemplate {
     public enum ActionTypes {
         NONE,
         JAVASCRIPT,
-        LUA,
         EXECUTE
     }
 }
