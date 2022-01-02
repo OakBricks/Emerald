@@ -23,5 +23,9 @@ To be honest, idk
 <br>[OpenLauncherLib](https://github.com/Litarvan/OpenLauncherLib)
 <br> [GSON](https://github.com/google/gson)
 <br> [DarkLaf](https://github.com/weisJ/darklaf)
+<br> [SLF4J](https://www.slf4j.org/)
+<br> [TinyLog](https://tinylog.org/)
+<br> [Apache Commons CLI](https://commons.apache.org/proper/commons-cli/index.html)
+<br> [Lombok](https://projectlombok.org/)
 
 ###### made using intellijank
