@@ -20,8 +20,7 @@ public class AccountsJson {
 
     public enum AccountType {
         XBOX,
-        MOJ,
-        OTHER
+        MOJ
     }
     public static String getJsonFromAccount(String uuid, String email, String password, AccountType type) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
