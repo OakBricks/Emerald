@@ -4,9 +4,9 @@ import lombok.NonNull;
 
 import java.util.UUID;
 
-public class InstanceJsonTemplate {
+public class InstanceJson {
 
-    public InstanceJsonTemplate(@NonNull UUID uuid, @NonNull String name, @NonNull ActionTypes launchActionType, @NonNull String launchAction, @NonNull ActionTypes exitActionType, @NonNull String exitAction) {
+    public InstanceJson(@NonNull UUID uuid, @NonNull String name, @NonNull ActionTypes launchActionType, @NonNull String launchAction, @NonNull ActionTypes exitActionType, @NonNull String exitAction) {
         instanceUuid = uuid;
         instanceName = name;
         instanceLaunchActionType = launchActionType;

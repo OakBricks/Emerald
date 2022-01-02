@@ -15,8 +15,8 @@ To be honest, idk
 - [ ] Instances
 
 # Other neat features
-- [ ] Scripting for events, such as launching an instance and closing an instance (maybe using jLua or Jython)
-- [ ] Instance wrapper (so shit like PackWiz would work)
+- [ ] Scripting for events, such as launching an instance and closing an instance (via Nashorn)
+- [ ] Instance wrapper support (so shit like PackWiz would work)
 
 # Libraries used
 [OpenAuth](https://github.com/Litarvan/OpenAuth)
