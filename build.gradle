@@ -14,17 +14,16 @@ repositories {
 
 dependencies {
     // why are we using json?
-    // for instances and configs, bozo
     implementation 'com.google.code.gson:gson:2.8.9'
     // logging
     implementation 'org.tinylog:tinylog-api:2.4.1'
     implementation 'org.tinylog:tinylog-impl:2.4.1'
     implementation 'org.tinylog:slf4j-tinylog:2.4.1'
     implementation 'org.slf4j:slf4j-api:1.7.32'
-    // When the launcher uses command-line arguments
+    // apache commons shit we need
     implementation 'commons-cli:commons-cli:1.5.0'
-    //didn't even know i still had this as a dep
-    //implementation 'net.sf.jopt-simple:jopt-simple:6.0-alpha-3'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'commons-codec:commons-codec:1.15'
     // Lombok lmao
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
