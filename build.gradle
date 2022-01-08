@@ -32,5 +32,5 @@ dependencies {
     // Dark and light mode
     implementation 'com.github.weisj:darklaf-core:2.7.3'
     // scripting
-    implementation 'org.openjdk.nashorn:nashorn-core:15.3'
+    implementation 'org.openjdk.nashorn:nashorn-core:15.2'
 }
