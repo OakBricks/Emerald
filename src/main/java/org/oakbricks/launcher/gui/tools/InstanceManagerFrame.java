@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InstanceManager extends JFrame implements ActionListener {
+public class InstanceManagerFrame extends JFrame implements ActionListener {
     private final JButton exit;
 
-    public InstanceManager() {
+    public InstanceManagerFrame() {
         exit = new JButton("Exit");
         exit.setBounds(0, 0, 125, 25);
         exit.addActionListener(this);

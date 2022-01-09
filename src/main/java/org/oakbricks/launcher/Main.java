@@ -12,36 +12,42 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 public class Main {
     public static boolean IS_DEBUGGING = false;
     public static final Logger LOGGER = LoggerFactory.getLogger("Launcher");
     public static final File configFile = new File("launcher.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static LauncherConfigJson config;
-    static {
-        try {
-            config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public static LauncherConfigJson config = new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT);
 
     public static void main(String[] args) throws ParseException, IOException {
         GuiMain guiThreadObj = new GuiMain();
         Thread guiThread = new Thread(guiThreadObj);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            config.setWinX(new GuiMain().getLocationOnScreen().x);
-            config.setWinY(new GuiMain().getLocationOnScreen().y);
-        }));
+
         LOGGER.info("Launcher Starting!");
 
         if (!configFile.exists()) {
+            try {
+                config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             LOGGER.debug("Launcher config does not exist");
             configFile.createNewFile();
             FileUtils.writeStringToFile(configFile, gson.toJson(new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT)), StandardCharsets.UTF_8);
         }
+        //LauncherConfigJson config = null;
+        //try {
+        //    config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
+
+        //LauncherConfigJson finalConfig = config;
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            config.setWinX(new GuiMain().getLocationOnScreen().x);
+            config.setWinY(new GuiMain().getLocationOnScreen().y);
+        }));
 
         // This is just its own mess
         Options cmdLineOptions = new Options();

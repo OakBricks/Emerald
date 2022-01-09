@@ -22,6 +22,24 @@ public class InstanceJson {
         instanceExitAction = exitAction;
     }
 
+    public InstanceJson(UUID uuid, String name, ActionTypes launchActionType, String launchAction) {
+        instanceUuid = uuid;
+        instanceName = name;
+        instanceLaunchActionType = launchActionType;
+        instanceLaunchAction = launchAction;
+        instanceExitActionType = ActionTypes.NONE;
+        instanceExitAction = "";
+    }
+
+    public InstanceJson(UUID uuid, String name) {
+        instanceUuid = uuid;
+        instanceName = name;
+        instanceLaunchActionType = ActionTypes.NONE;
+        instanceLaunchAction = "";
+        instanceExitActionType = ActionTypes.NONE;
+        instanceExitAction = "";
+    }
+
     public enum ActionTypes {
         NONE,
         JAVASCRIPT,

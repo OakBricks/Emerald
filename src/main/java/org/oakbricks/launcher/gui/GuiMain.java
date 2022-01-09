@@ -2,10 +2,9 @@ package org.oakbricks.launcher.gui;
 
 import com.google.gson.*;
 import org.oakbricks.launcher.Main;
-import org.oakbricks.launcher.core.json.LauncherConfigJson;
 import org.oakbricks.launcher.gui.tools.AccountManagementFrame;
 import org.oakbricks.launcher.gui.tools.DebuggingFrame;
-import org.oakbricks.launcher.gui.tools.InstanceManager;
+import org.oakbricks.launcher.gui.tools.InstanceManagerFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static org.oakbricks.launcher.Main.*;
@@ -31,6 +29,7 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
     Icon addInstancesIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/01.png")));
     Icon accountManagementIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/02.png")));
     Icon debuggingIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/03.png")));
+    Icon settingsIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/03.png")));
     Image frameIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/00.png"))).getImage();
 
     @Override
@@ -51,6 +50,11 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
         new JOptionPane();
 
         lastUsedAccountLabel = new JLabel(config.getLastUsedAccount());
+        if (lastUsedAccountLabel.getText() == null || lastUsedAccountLabel.getText() == "") {
+            lastUsedAccountLabel.setText("No Account");
+        }
+
+        settingsButton = new JButton("Settings", settingsIcon);
 
         toolBar.add(instancesButton);
         toolBar.add(accountsButton);
@@ -89,9 +93,8 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == instancesButton) {
-            new InstanceManager();
+            new InstanceManagerFrame();
         } else if (e.getSource() == accountsButton) {
-            LOGGER.info("Development placeholder");
             new Thread(new AccountManagementFrame()).start();
         } else if (e.getSource() == debugButton && Main.IS_DEBUGGING) {
             new DebuggingFrame();

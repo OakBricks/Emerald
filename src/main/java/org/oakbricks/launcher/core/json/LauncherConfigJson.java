@@ -6,6 +6,7 @@ public class LauncherConfigJson {
     private String windowIconPath;
     private Themes launcherTheme;
     private String lastUsedAccount;
+    private String perferredAccount;
 
     public LauncherConfigJson(int winX, int winY, String windowIconPath, Themes launcherTheme, String lastUsedAccount) {
         this.winX = winX;
@@ -18,7 +19,6 @@ public class LauncherConfigJson {
     public LauncherConfigJson(int winX, int winY, Themes launcherTheme, String lastUsedAccount) {
         this.winX = winX;
         this.winY = winY;
-        this.windowIconPath = "";
         this.launcherTheme = launcherTheme;
         this.lastUsedAccount = lastUsedAccount;
     }
@@ -26,9 +26,7 @@ public class LauncherConfigJson {
     public LauncherConfigJson(int winX, int winY, Themes launcherTheme) {
         this.winX = winX;
         this.winY = winY;
-        this.windowIconPath = "";
         this.launcherTheme = launcherTheme;
-        this.lastUsedAccount = lastUsedAccount;
     }
 
     public enum Themes {

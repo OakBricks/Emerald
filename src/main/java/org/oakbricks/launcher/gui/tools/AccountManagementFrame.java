@@ -2,11 +2,15 @@ package org.oakbricks.launcher.gui.tools;
 
 import com.google.gson.Gson;
 import fr.litarvan.openauth.AuthPoints;
+import fr.litarvan.openauth.AuthenticationException;
 import fr.litarvan.openauth.Authenticator;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
 import fr.litarvan.openauth.microsoft.model.response.MinecraftProfile;
+import fr.litarvan.openauth.model.AuthAgent;
+import fr.litarvan.openauth.model.AuthProfile;
+import fr.litarvan.openauth.model.response.AuthResponse;
 import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.core.json.AccountsJson;
 
@@ -61,8 +65,23 @@ public class AccountManagementFrame extends JFrame implements Runnable, ActionLi
         if (e.getSource() == addMojAccountButton) {
             int result = JOptionPane.showConfirmDialog(this, emailUserNameAuthObjects, "Log in using Mojang", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
-                AuthPoints authPoints = AuthPoints.NORMAL_AUTH_POINTS;
-                Authenticator authenticator = new Authenticator(Authenticator.MOJANG_AUTH_URL, authPoints);
+                AuthPoints authPoint = AuthPoints.NORMAL_AUTH_POINTS;
+                Authenticator authenticatater = new Authenticator(Authenticator.MOJANG_AUTH_URL, authPoint);
+                AuthResponse authResponse = null;
+                try {
+                     authResponse = authenticatater.authenticate(AuthAgent.MINECRAFT, userNameTextField.getText(), passwordTextField.getText(), "");
+                } catch (AuthenticationException ex) {
+                    ex.printStackTrace();
+                }
+                ACCOUNT_FILE = new File("accounts", authResponse.getSelectedProfile().getId());
+                ACCOUNT_FILE.getParentFile().mkdir();
+                try {
+                    AuthProfile PROFILE = authResponse.getSelectedProfile();
+                    ACCOUNT_FILE.createNewFile();
+                    FileUtils.writeStringToFile(ACCOUNT_FILE, AccountsJson.getJsonFromAccount(PROFILE.getId(), PROFILE.getName(), userNameTextField.getText(), passwordTextField.getText(), AccountsJson.AccountType.MOJ), StandardCharsets.UTF_8);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         } else if (e.getSource() == addMSAButton) {
             int result = JOptionPane.showConfirmDialog(this, emailUserNameAuthObjects, "Log in using Microsoft", JOptionPane.OK_CANCEL_OPTION);

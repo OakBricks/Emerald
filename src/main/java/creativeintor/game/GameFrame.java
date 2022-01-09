@@ -14,14 +14,14 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
     private static final long serialVersionUID = 1L;
-    public static String title = "v1.7.0";
+    public static String version = "v1.7.0";
     public static int secondsPassed;
     public static int minutesPassed;
     public static int tSecondsPassed;
 
     public GameFrame() {
         this.add(new GamePanel());
-        this.setTitle("Get The Apple! " + title);
+        this.setTitle("Get The Apple! " + version);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setResizable(true);
         this.pack();

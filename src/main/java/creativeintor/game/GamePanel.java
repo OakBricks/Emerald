@@ -250,7 +250,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 g.drawString(String.valueOf("Fps: " + this.fpsTimer), 875, 50);
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("", 0, 30));
-                g.drawString(String.valueOf(GameFrame.title), 5, 715);
+                g.drawString(String.valueOf(GameFrame.version), 5, 715);
             }
         }
         if (gameOver) {
