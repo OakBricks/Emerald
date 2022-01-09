@@ -1,6 +1,8 @@
 package org.oakbricks.launcher.gui.tools;
 
 import com.google.gson.Gson;
+import fr.litarvan.openauth.AuthPoints;
+import fr.litarvan.openauth.Authenticator;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
@@ -57,7 +59,11 @@ public class AccountManagementFrame extends JFrame implements Runnable, ActionLi
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addMojAccountButton) {
-
+            int result = JOptionPane.showConfirmDialog(this, emailUserNameAuthObjects, "Log in using Mojang", JOptionPane.OK_CANCEL_OPTION);
+            if (result == 0) {
+                AuthPoints authPoints = AuthPoints.NORMAL_AUTH_POINTS;
+                Authenticator authenticator = new Authenticator(Authenticator.MOJANG_AUTH_URL, authPoints);
+            }
         } else if (e.getSource() == addMSAButton) {
             int result = JOptionPane.showConfirmDialog(this, emailUserNameAuthObjects, "Log in using Microsoft", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
@@ -68,8 +74,6 @@ public class AccountManagementFrame extends JFrame implements Runnable, ActionLi
                 } catch (MicrosoftAuthenticationException ex) {
                     ex.printStackTrace();
                 }
-                LOGGER.debug("Logged into Xbox using {}", authResult.getProfile().getId());
-                LOGGER.info(AccountsJson.getJsonFromAccount(authResult.getProfile().getId(), authResult.getProfile().getName(), userNameTextField.getText(), passwordTextField.getText(), AccountsJson.AccountType.MSA));
                 ACCOUNT_FILE = new File("accounts", authResult.getProfile().getId());
                 ACCOUNT_FILE.getParentFile().mkdir();
                 try {

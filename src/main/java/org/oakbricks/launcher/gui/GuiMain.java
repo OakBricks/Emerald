@@ -2,6 +2,7 @@ package org.oakbricks.launcher.gui;
 
 import com.google.gson.*;
 import org.oakbricks.launcher.Main;
+import org.oakbricks.launcher.core.json.LauncherConfigJson;
 import org.oakbricks.launcher.gui.tools.AccountManagementFrame;
 import org.oakbricks.launcher.gui.tools.DebuggingFrame;
 import org.oakbricks.launcher.gui.tools.InstanceManager;
@@ -12,10 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Objects;
 
-import static org.oakbricks.launcher.Main.LOGGER;
+import static org.oakbricks.launcher.Main.*;
 
 public class GuiMain extends JFrame implements ActionListener, Runnable {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -34,13 +35,6 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
 
     @Override
     public void run() {
-        JsonElement configElement = null;
-        try {
-            configElement = JsonParser.parseReader(new FileReader(Main.configFile));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JsonObject configJsonObject = configElement.getAsJsonObject();
         instancesPanel = new JPanel();
 
         toolBar = new JToolBar();
@@ -56,7 +50,7 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
         debugButton.addActionListener(this);
         new JOptionPane();
 
-        lastUsedAccountLabel = new JLabel(configJsonObject.get("lastUsedAccount").getAsString());
+        lastUsedAccountLabel = new JLabel(config.getLastUsedAccount());
 
         toolBar.add(instancesButton);
         toolBar.add(accountsButton);
@@ -69,25 +63,23 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
             lastUsedAccountLabel.setText("No Account");
         }
 
-        if (configJsonObject.get("windowIconPath").getAsString().equals("")) {
+        if (config.getWindowIconPath() == null) {
             setIconImage(frameIcon);
         } else {
-            setIconImage(new ImageIcon(configJsonObject.get("windowIconPath").getAsString()).getImage());
+            setIconImage(new ImageIcon(config.getWindowIconPath()).getImage());
         }
-
 
         add(toolBar, BorderLayout.PAGE_START);
         add(instancesPanel);
 
         setTitle("Launcher");
-        setLocation(configJsonObject.getAsJsonArray("winPos").get(0).getAsInt(), configJsonObject.getAsJsonArray("winPos").get(1).getAsInt());
+        setLocation(config.getWinX(), config.getWinY());
         setSize(800, 600);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent event) {
-                LOGGER.debug("test");
                 System.exit(0);
             }
         });

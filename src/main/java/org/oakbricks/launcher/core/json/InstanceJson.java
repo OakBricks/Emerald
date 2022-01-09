@@ -6,7 +6,14 @@ import java.util.UUID;
 
 public class InstanceJson {
 
-    public InstanceJson(@NonNull UUID uuid, @NonNull String name, @NonNull ActionTypes launchActionType, @NonNull String launchAction, @NonNull ActionTypes exitActionType, @NonNull String exitAction) {
+    UUID instanceUuid;
+    String instanceName;
+    ActionTypes instanceLaunchActionType;
+    String instanceLaunchAction;
+    ActionTypes instanceExitActionType;
+    String instanceExitAction;
+    
+    public InstanceJson(UUID uuid, String name, ActionTypes launchActionType, String launchAction, ActionTypes exitActionType, String exitAction) {
         instanceUuid = uuid;
         instanceName = name;
         instanceLaunchActionType = launchActionType;
@@ -14,16 +21,58 @@ public class InstanceJson {
         instanceExitActionType = exitActionType;
         instanceExitAction = exitAction;
     }
-    UUID instanceUuid;
-    String instanceName;
-    ActionTypes instanceLaunchActionType;
-    String instanceLaunchAction;
-    ActionTypes instanceExitActionType;
-    String instanceExitAction;
 
     public enum ActionTypes {
         NONE,
         JAVASCRIPT,
         EXECUTE
+    }
+
+    public ActionTypes getInstanceExitActionType() {
+        return instanceExitActionType;
+    }
+
+    public ActionTypes getInstanceLaunchActionType() {
+        return instanceLaunchActionType;
+    }
+
+    public String getInstanceExitAction() {
+        return instanceExitAction;
+    }
+
+    public String getInstanceLaunchAction() {
+        return instanceLaunchAction;
+    }
+
+    public String getInstanceName() {
+        return instanceName;
+    }
+
+    public UUID getInstanceUuid() {
+        return instanceUuid;
+    }
+
+    public void setInstanceExitAction(String instanceExitAction) {
+        this.instanceExitAction = instanceExitAction;
+    }
+
+    public void setInstanceExitActionType(ActionTypes instanceExitActionType) {
+        this.instanceExitActionType = instanceExitActionType;
+    }
+
+    public void setInstanceLaunchAction(String instanceLaunchAction) {
+        this.instanceLaunchAction = instanceLaunchAction;
+    }
+
+    public void setInstanceLaunchActionType(ActionTypes instanceLaunchActionType) {
+        this.instanceLaunchActionType = instanceLaunchActionType;
+    }
+
+    public void setInstanceName(String instanceName) {
+        this.instanceName = instanceName;
+    }
+
+    public void setInstanceUuid(UUID instanceUuid) {
+        this.instanceUuid = instanceUuid;
     }
 }
