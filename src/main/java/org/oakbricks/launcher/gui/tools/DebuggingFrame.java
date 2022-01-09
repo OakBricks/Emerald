@@ -1,11 +1,13 @@
 package org.oakbricks.launcher.gui.tools;
 
+import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.Main;
 import org.oakbricks.launcher.scripting.LauncherBaseJavascriptMethods;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 public class DebuggingFrame extends JFrame implements ActionListener {
@@ -16,6 +18,7 @@ public class DebuggingFrame extends JFrame implements ActionListener {
     JComboBox<String> scriptingComboBox;
     JTextArea scriptingTextField;
     JButton scriptingButton;
+    JButton getAllAccountInfoButton;
 
     public DebuggingFrame() {
         String[] loggerLevels = {"Info", "Debug", "Trace", "Warn", "Error"};
@@ -47,6 +50,10 @@ public class DebuggingFrame extends JFrame implements ActionListener {
         scriptingTextField = new JTextArea();
         scriptingTextField.setBounds(25, 75, 250, 100);
 
+        getAllAccountInfoButton = new JButton("Get the info of every account");
+        getAllAccountInfoButton.addActionListener(this);
+        getAllAccountInfoButton.setBounds(25, 200, 250, 25);
+
         add(exitButton);
         add(loggerLevelComboBox);
         add(loggerTestButton);
@@ -54,6 +61,7 @@ public class DebuggingFrame extends JFrame implements ActionListener {
         add(scriptingComboBox);
         add(scriptingButton);
         add(scriptingTextField);
+        add(getAllAccountInfoButton);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -104,6 +112,20 @@ public class DebuggingFrame extends JFrame implements ActionListener {
                     break;
                 case 2:
                     Main.LOGGER.debug("Not yet implemented");
+            }
+        } else if (e.getSource() == getAllAccountInfoButton) {
+            File accountsDir = new File("accounts/");
+            File[] accountFiles = accountsDir.listFiles();
+
+            for (File accountFile: accountFiles) {
+                String fileContents = null;
+                try {
+                    fileContents = FileUtils.readFileToString(accountFile);
+                } catch (IOException ex) {
+                    fileContents = "placeholder";
+                    ex.printStackTrace();
+                }
+                Main.LOGGER.info(fileContents);
             }
         }
     }

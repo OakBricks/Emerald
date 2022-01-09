@@ -1,17 +1,25 @@
 package org.oakbricks.launcher.gui.tools;
 
+import com.google.gson.Gson;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
+import fr.litarvan.openauth.microsoft.model.response.MinecraftProfile;
+import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.core.json.AccountsJson;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import static org.oakbricks.launcher.Main.LOGGER;
 
 public class AccountManagementFrame extends JFrame implements Runnable, ActionListener {
+    File ACCOUNT_FILE;
+
     JButton addMSAButton;
     JButton addMojAccountButton;
     JLabel userNameLabel;
@@ -51,7 +59,7 @@ public class AccountManagementFrame extends JFrame implements Runnable, ActionLi
         if (e.getSource() == addMojAccountButton) {
 
         } else if (e.getSource() == addMSAButton) {
-            int result = JOptionPane.showConfirmDialog(null, emailUserNameAuthObjects, "Log in using Microsoft", JOptionPane.OK_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(this, emailUserNameAuthObjects, "Log in using Microsoft", JOptionPane.OK_CANCEL_OPTION);
             if (result == 0) {
                 MicrosoftAuthenticator authenticator = new MicrosoftAuthenticator();
                 MicrosoftAuthResult authResult = null;
@@ -61,7 +69,17 @@ public class AccountManagementFrame extends JFrame implements Runnable, ActionLi
                     ex.printStackTrace();
                 }
                 LOGGER.debug("Logged into Xbox using {}", authResult.getProfile().getId());
-                LOGGER.info(AccountsJson.getJsonFromAccount(authResult.getProfile().getId(), passwordTextField.getText(), passwordTextField.getText(), AccountsJson.AccountType.XBOX));
+                LOGGER.info(AccountsJson.getJsonFromAccount(authResult.getProfile().getId(), authResult.getProfile().getName(), userNameTextField.getText(), passwordTextField.getText(), AccountsJson.AccountType.MSA));
+                ACCOUNT_FILE = new File("accounts", authResult.getProfile().getId());
+                ACCOUNT_FILE.getParentFile().mkdir();
+                try {
+                    MinecraftProfile PROFILE = authResult.getProfile();
+                    ACCOUNT_FILE.createNewFile();
+                    FileUtils.writeStringToFile(ACCOUNT_FILE, AccountsJson.getJsonFromAccount(PROFILE.getId(), PROFILE.getName(),userNameTextField.getText(), passwordTextField.getText(), AccountsJson.AccountType.MSA), StandardCharsets.UTF_8);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
             }
         }
     }

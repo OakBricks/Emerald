@@ -1,25 +1,19 @@
 package org.oakbricks.launcher;
 
-import com.github.weisj.darklaf.LafManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.oakbricks.launcher.core.json.LauncherConfigJson;
 import org.oakbricks.launcher.gui.GuiMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.script.ScriptException;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Base64;
 
 public class Main {
@@ -27,10 +21,8 @@ public class Main {
     public static final Logger LOGGER = LoggerFactory.getLogger("Launcher");
     public static final File configFile = new File("launcher.json");
 
-    public static void main(String[] args) throws ParseException, IOException, NoSuchAlgorithmException {
+    public static void main(String[] args) throws ParseException, IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        LafManager.install();
-        LafManager.installTheme(LafManager.getPreferredThemeStyle());
         GuiMain guiThreadObj = new GuiMain();
         Thread guiThread = new Thread(guiThreadObj);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Shutting down launcher!")));

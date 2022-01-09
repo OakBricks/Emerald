@@ -1,8 +1,5 @@
 package org.oakbricks.launcher.core.json;
 
-
-import com.github.weisj.darklaf.theme.Theme;
-
 public class LauncherConfigJson {
     public static class LauncherConfig {
         public LauncherConfig(int[] winPos, String windowIconPath, Themes launcherTheme, String lastUsedAccount) {
