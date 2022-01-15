@@ -16,8 +16,11 @@ import java.util.Objects;
 
 import static org.oakbricks.launcher.Main.*;
 
-public class GuiMain extends JFrame implements ActionListener, Runnable {
+public class MainFrame extends JFrame implements ActionListener, Runnable {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    public static int WINDOW_X;
+    public static int WINDOW_Y;
 
     JPanel instancesPanel;
     JToolBar toolBar;
@@ -26,11 +29,11 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
     JButton settingsButton;
     JButton debugButton;
     JLabel lastUsedAccountLabel;
-    Icon addInstancesIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/01.png")));
-    Icon accountManagementIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/02.png")));
-    Icon debuggingIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/03.png")));
-    Icon settingsIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/03.png")));
-    Image frameIcon = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/icons/00.png"))).getImage();
+    Icon addInstancesIcon = new ImageIcon(this.getClass().getResource("/icons/00.png"));
+    Icon accountManagementIcon = new ImageIcon(this.getClass().getResource("/icons/06.png"));
+    Icon debuggingIcon = new ImageIcon(this.getClass().getResource("/icons/05.png"));
+    Icon settingsIcon = new ImageIcon(this.getClass().getResource("/icons/03.png"));
+    Image frameIcon = new ImageIcon(this.getClass().getResource("/icon.png")).getImage();
 
     @Override
     public void run() {
@@ -49,8 +52,8 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
         debugButton.addActionListener(this);
         new JOptionPane();
 
-        lastUsedAccountLabel = new JLabel(config.getLastUsedAccount());
-        if (lastUsedAccountLabel.getText() == null || lastUsedAccountLabel.getText() == "") {
+        lastUsedAccountLabel = new JLabel(config.getPreferredAccount());
+        if (lastUsedAccountLabel.getText() == null || lastUsedAccountLabel.getText().equals("")) {
             lastUsedAccountLabel.setText("No Account");
         }
 
@@ -61,17 +64,18 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
         if (Main.IS_DEBUGGING) {
             toolBar.add(debugButton);
         }
-        toolBar.addSeparator(new Dimension());
+        toolBar.add(Box.createHorizontalGlue());
         toolBar.add(lastUsedAccountLabel);
         if (Objects.equals(lastUsedAccountLabel.getText(), "Tm9uZQ\u003d\u003d")) {
             lastUsedAccountLabel.setText("No Account");
         }
 
-        if (config.getWindowIconPath() == null) {
-            setIconImage(frameIcon);
-        } else {
-            setIconImage(new ImageIcon(config.getWindowIconPath()).getImage());
-        }
+        setIconImage(frameIcon);
+//        if (config.getWindowIconPath() == null) {
+//            setIconImage(frameIcon);
+//        } else {
+//            setIconImage(new ImageIcon(config.getWindowIconPath()).getImage());
+//        }
 
         add(toolBar, BorderLayout.PAGE_START);
         add(instancesPanel);
@@ -84,6 +88,8 @@ public class GuiMain extends JFrame implements ActionListener, Runnable {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent event) {
+                WINDOW_X = getLocationOnScreen().x;
+                WINDOW_Y = getLocationOnScreen().y;
                 System.exit(0);
             }
         });

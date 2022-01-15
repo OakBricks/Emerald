@@ -5,10 +5,11 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.core.json.LauncherConfigJson;
-import org.oakbricks.launcher.gui.GuiMain;
+import org.oakbricks.launcher.gui.MainFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -20,22 +21,12 @@ public class Main {
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static LauncherConfigJson config = new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT);
 
-    public static void main(String[] args) throws ParseException, IOException {
-        GuiMain guiThreadObj = new GuiMain();
+    public static void main(String[] args) throws ParseException, IOException, UnsupportedLookAndFeelException {
+        MainFrame guiThreadObj = new MainFrame();
         Thread guiThread = new Thread(guiThreadObj);
 
         LOGGER.info("Launcher Starting!");
 
-        if (!configFile.exists()) {
-            try {
-                config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            LOGGER.debug("Launcher config does not exist");
-            configFile.createNewFile();
-            FileUtils.writeStringToFile(configFile, gson.toJson(new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT)), StandardCharsets.UTF_8);
-        }
         //LauncherConfigJson config = null;
         //try {
         //    config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
@@ -45,8 +36,7 @@ public class Main {
 
         //LauncherConfigJson finalConfig = config;
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            config.setWinX(new GuiMain().getLocationOnScreen().x);
-            config.setWinY(new GuiMain().getLocationOnScreen().y);
+
         }));
 
         // This is just its own mess
@@ -58,6 +48,17 @@ public class Main {
             IS_DEBUGGING = true;
             LOGGER.debug("DEBUGGING ENABLED");
         }
-        guiThread.start();
+        try {
+            config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (!configFile.exists()) {
+            LOGGER.debug("Launcher config does not exist, creating!");
+            configFile.createNewFile();
+            FileUtils.writeStringToFile(configFile, gson.toJson(new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT)), StandardCharsets.UTF_8);
+        } else {
+            guiThread.start();
+        }
     }
 }

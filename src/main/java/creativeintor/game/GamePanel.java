@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements ActionListener {
     int minute;
     int deathCounter;
     int direction = 82;
-    static boolean running;
+    static boolean running = false;
     static boolean titleScreen;
     static boolean dMode;
     static boolean gameOver;
@@ -60,10 +60,6 @@ public class GamePanel extends JPanel implements ActionListener {
     static JButton stBackButton;
     static JButton resumeButton;
     static JButton pausedMenuButton;
-//
-//    static {
-//        running = false;
-//    }
 
     GamePanel() {
         playAgainButton = new JButton();
@@ -194,10 +190,10 @@ public class GamePanel extends JPanel implements ActionListener {
             g.setColor(Color.WHITE);
             g.setFont(new Font(Font.SANS_SERIF, 1, 30));
             FontMetrics metrics = this.getFontMetrics(g.getFont());
-            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 1, g.getFont().getSize());
+            g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)), g.getFont().getSize());
             g.setColor(Color.WHITE);
             g.setFont(new Font(Font.SANS_SERIF, 1, 20));
-            g.drawString(String.valueOf("Deaths: " + this.deathCounter), 3, 40);
+            g.drawString("Deaths: " + this.deathCounter, 3, 40);
             if (GameFrame.secondsPassed == 60) {
                 GameFrame.secondsPassed = 0;
                 ++GameFrame.minutesPassed;
@@ -205,11 +201,11 @@ public class GamePanel extends JPanel implements ActionListener {
             if (GameFrame.secondsPassed <= 9) {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font(Font.SANS_SERIF, 1, 25));
-                g.drawString(String.valueOf("Time: " + GameFrame.minutesPassed + ":" + "0" + GameFrame.secondsPassed), 3, 23);
+                g.drawString("Time: " + GameFrame.minutesPassed + ":" + "0" + GameFrame.secondsPassed, 3, 23);
             } else {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font(Font.SANS_SERIF, 1, 25));
-                g.drawString(String.valueOf("Time: " + GameFrame.minutesPassed + ":" + GameFrame.secondsPassed), 3, 23);
+                g.drawString("Time: " + GameFrame.minutesPassed + ":" + GameFrame.secondsPassed, 3, 23);
             }
             if (GameFrame.minutesPassed == 60) {
                 GameFrame.minutesPassed = 0;
@@ -369,16 +365,16 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void autoTurn() {
         if (this.x[0] < 0) {
-            this.direction = (char)82;
+            this.direction = 82;
         }
         if (this.x[0] > SCREEN_WIDTH) {
-            this.direction = (char)76;
+            this.direction = 76;
         }
         if (this.y[0] < 0) {
-            this.direction = (char)68;
+            this.direction = 68;
         }
         if (this.y[0] > SCREEN_HEIGHT) {
-            this.direction = (char)85;
+            this.direction = 85;
         }
     }
 
@@ -498,22 +494,22 @@ public class GamePanel extends JPanel implements ActionListener {
             switch (e.getKeyCode()) {
                 case 37: {
                     if (GamePanel.this.direction == 'R') break;
-                    GamePanel.this.direction = (char)76;
+                    GamePanel.this.direction = 76;
                     break;
                 }
                 case 39: {
                     if (GamePanel.this.direction == 'L') break;
-                    GamePanel.this.direction = (char)82;
+                    GamePanel.this.direction = 82;
                     break;
                 }
                 case 38: {
                     if (GamePanel.this.direction == 'D') break;
-                    GamePanel.this.direction = (char)85;
+                    GamePanel.this.direction = 85;
                     break;
                 }
                 case 40: {
                     if (GamePanel.this.direction == 'U') break;
-                    GamePanel.this.direction = (char)68;
+                    GamePanel.this.direction = 68;
                     break;
                 }
                 case 27: {
@@ -530,22 +526,22 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 case 65: {
                     if (GamePanel.this.direction == 'R') break;
-                    GamePanel.this.direction = (char)76;
+                    GamePanel.this.direction = 76;
                     break;
                 }
                 case 68: {
                     if (GamePanel.this.direction == 'L') break;
-                    GamePanel.this.direction = (char)82;
+                    GamePanel.this.direction = 82;
                     break;
                 }
                 case 87: {
                     if (GamePanel.this.direction == 'D') break;
-                    GamePanel.this.direction = (char)85;
+                    GamePanel.this.direction = 85;
                     break;
                 }
                 case 83: {
                     if (GamePanel.this.direction == 'U') break;
-                    GamePanel.this.direction = (char)68;
+                    GamePanel.this.direction = 68;
                 }
             }
         }

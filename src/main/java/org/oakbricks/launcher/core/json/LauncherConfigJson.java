@@ -1,26 +1,25 @@
 package org.oakbricks.launcher.core.json;
 
+import org.oakbricks.launcher.Main;
+import org.oakbricks.launcher.gui.MainFrame;
+
 public class LauncherConfigJson {
     private int winX;
     private int winY;
-    private String windowIconPath;
     private Themes launcherTheme;
-    private String lastUsedAccount;
-    private String perferredAccount;
+    private String preferredAccount;
 
-    public LauncherConfigJson(int winX, int winY, String windowIconPath, Themes launcherTheme, String lastUsedAccount) {
-        this.winX = winX;
-        this.winY = winY;
-        this.windowIconPath = windowIconPath;
-        this.launcherTheme = launcherTheme;
-        this.lastUsedAccount = lastUsedAccount;
+    public LauncherConfigJson() {
+        winX = 0;
+        winY = 0;
+        launcherTheme = Themes.DEFAULT;
     }
 
-    public LauncherConfigJson(int winX, int winY, Themes launcherTheme, String lastUsedAccount) {
+    public LauncherConfigJson(int winX, int winY, Themes launcherTheme, String preferredAccount) {
         this.winX = winX;
         this.winY = winY;
         this.launcherTheme = launcherTheme;
-        this.lastUsedAccount = lastUsedAccount;
+        this.preferredAccount = preferredAccount;
     }
 
     public LauncherConfigJson(int winX, int winY, Themes launcherTheme) {
@@ -36,8 +35,8 @@ public class LauncherConfigJson {
         CUSTOM
     }
 
-    public String getLastUsedAccount() {
-        return lastUsedAccount;
+    public String getPreferredAccount() {
+        return preferredAccount;
     }
 
     public int getWinX() {
@@ -48,24 +47,16 @@ public class LauncherConfigJson {
         return winY;
     }
 
-    public String getWindowIconPath() {
-        return windowIconPath;
-    }
-
     public Themes getLauncherTheme() {
         return launcherTheme;
     }
 
-    public void setLastUsedAccount(String lastUsedAccount) {
-        this.lastUsedAccount = lastUsedAccount;
+    public void setPreferredAccount(String preferredAccount) {
+        this.preferredAccount = preferredAccount;
     }
 
     public void setLauncherTheme(Themes launcherTheme) {
         this.launcherTheme = launcherTheme;
-    }
-
-    public void setWindowIconPath(String windowIconPath) {
-        this.windowIconPath = windowIconPath;
     }
 
     public void setWinX(int winX) {
@@ -74,5 +65,24 @@ public class LauncherConfigJson {
 
     public void setWinY(int winY) {
         this.winY = winY;
+    }
+
+    /**
+     * @since 0.1@1/12/2022
+     * There is a better way i could do this
+     */
+    public static LauncherConfigJson flushConfig() {
+        LauncherConfigJson lCJ = new LauncherConfigJson();
+        LauncherConfigJson configToBeFlushed;
+
+        if (Main.config.getPreferredAccount() == null) {
+            configToBeFlushed = new LauncherConfigJson(MainFrame.WINDOW_X, MainFrame.WINDOW_Y, lCJ.getLauncherTheme());
+        } else if (Main.config.getPreferredAccount() != null) {
+            configToBeFlushed = new LauncherConfigJson(MainFrame.WINDOW_X, MainFrame.WINDOW_Y, lCJ.getLauncherTheme(), lCJ.getPreferredAccount());
+        } else {
+            configToBeFlushed = new LauncherConfigJson();
+        }
+
+        return configToBeFlushed;
     }
 }

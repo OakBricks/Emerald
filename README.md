@@ -15,14 +15,13 @@ To be honest, idk
 - [ ] Instances
 
 # Other neat features
-- [ ] Scripting for events, such as launching an instance and closing an instance (via Nashorn)
+- [x] Scripting for events, such as launching an instance and closing an instance (via Nashorn)
 - [ ] Instance wrapper support (so shit like PackWiz would work)
 
 # Libraries used
 [OpenAuth](https://github.com/Litarvan/OpenAuth)
 <br>[OpenLauncherLib](https://github.com/Litarvan/OpenLauncherLib)
 <br> [GSON](https://github.com/google/gson)
-<br> [DarkLaf](https://github.com/weisJ/darklaf)
 <br> [SLF4J](https://www.slf4j.org/)
 <br> [TinyLog](https://tinylog.org/)
 <br> [Apache Commons CLI](https://commons.apache.org/proper/commons-cli/index.html)

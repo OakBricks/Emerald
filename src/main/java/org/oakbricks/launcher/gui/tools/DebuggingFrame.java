@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class DebuggingFrame extends JFrame implements ActionListener {
     JButton exitButton;
@@ -19,6 +20,8 @@ public class DebuggingFrame extends JFrame implements ActionListener {
     JTextArea scriptingTextField;
     JButton scriptingButton;
     JButton getAllAccountInfoButton;
+    JButton loadClassButton;
+    JTextField loadClassField;
 
     public DebuggingFrame() {
         String[] loggerLevels = {"Info", "Debug", "Trace", "Warn", "Error"};
@@ -54,6 +57,13 @@ public class DebuggingFrame extends JFrame implements ActionListener {
         getAllAccountInfoButton.addActionListener(this);
         getAllAccountInfoButton.setBounds(25, 200, 250, 25);
 
+        loadClassButton = new JButton("Load Class");
+        loadClassButton.addActionListener(this);
+        loadClassButton.setBounds(25, 225, 100, 25);
+
+        loadClassField = new JTextField();
+        loadClassField.setBounds(125, 225, 150, 25);
+
         add(exitButton);
         add(loggerLevelComboBox);
         add(loggerTestButton);
@@ -62,6 +72,8 @@ public class DebuggingFrame extends JFrame implements ActionListener {
         add(scriptingButton);
         add(scriptingTextField);
         add(getAllAccountInfoButton);
+        add(loadClassButton);
+        add(loadClassField);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -120,12 +132,26 @@ public class DebuggingFrame extends JFrame implements ActionListener {
             for (File accountFile: accountFiles) {
                 String fileContents = null;
                 try {
-                    fileContents = FileUtils.readFileToString(accountFile);
+                    fileContents = FileUtils.readFileToString(accountFile, StandardCharsets.UTF_8);
                 } catch (IOException ex) {
                     fileContents = "placeholder";
                     ex.printStackTrace();
                 }
                 Main.LOGGER.info(fileContents);
+            }
+        } else if (e.getSource() == loadClassButton) {
+            Class<?> loadedClass = null;
+            try {
+                loadedClass = Class.forName(loadClassField.getText());
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                Object ob = loadedClass.newInstance();
+            } catch (InstantiationException ex) {
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
             }
         }
     }
