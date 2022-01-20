@@ -25,7 +25,7 @@ public class DebuggingFrame extends JFrame implements ActionListener {
 
     public DebuggingFrame() {
         String[] loggerLevels = {"Info", "Debug", "Trace", "Warn", "Error"};
-        String[] actionTypes = {"Javascript", "Execute", "Lua", "None"};
+        String[] actionTypes = {"Javascript", "Execute", "None"};
         exitButton = new JButton("Exit");
         exitButton.addActionListener(this);
         exitButton.setBounds(25, 400, 125, 25);
@@ -122,8 +122,6 @@ public class DebuggingFrame extends JFrame implements ActionListener {
                         ex.printStackTrace();
                     }
                     break;
-                case 2:
-                    Main.LOGGER.debug("Not yet implemented");
             }
         } else if (e.getSource() == getAllAccountInfoButton) {
             File accountsDir = new File("accounts/");
