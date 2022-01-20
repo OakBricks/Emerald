@@ -3,32 +3,30 @@ package org.oakbricks.launcher.gui;
 import org.oakbricks.launcher.Main;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FirstLaunchFrame extends JFrame implements ActionListener {
-    JButton nextButton;
-    JButton prevButton;
+    JButton loginButton;
+    JButton skipButton;
     JButton cancelButton;
-    JTabbedPane firstLaunchOptions;
-    GridBagConstraints constraints;
 
     public FirstLaunchFrame() {
 
-        nextButton = new JButton("Next");
-        nextButton.setBounds(525, 450, 50, 25);
+        loginButton = new JButton("Login to a Minecraft account");
+        loginButton.setBounds(25, 25, 150, 25);
+        loginButton.addActionListener(this);
 
-        prevButton = new JButton("Previous");
+        skipButton = new JButton("Skip and go to launcher with default config");
+        skipButton.setBounds(500, 400, 250, 25);
+        skipButton.addActionListener(this);
 
         cancelButton = new JButton("Cancel");
 
-        firstLaunchOptions = new JTabbedPane(JTabbedPane.LEFT);
 
-        add(nextButton);
-        add(prevButton);
+        add(loginButton);
+        add(skipButton);
         add(cancelButton);
-        add(firstLaunchOptions);
 
         setLayout(null);
         setResizable(false);
@@ -38,9 +36,11 @@ public class FirstLaunchFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == nextButton) {
-            Main.LOGGER.info("Next page");
-            firstLaunchOptions.setSelectedIndex(firstLaunchOptions.getSelectedIndex() + 1);
+        if (e.getSource() == loginButton) {
+            new LoginFrame();
+        } else if (e.getSource() == skipButton) {
+            dispose();
+            new MainFrame();
         }
     }
 }

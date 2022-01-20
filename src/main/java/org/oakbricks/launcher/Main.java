@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.core.json.LauncherConfigJson;
+import org.oakbricks.launcher.gui.FirstLaunchFrame;
 import org.oakbricks.launcher.gui.MainFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +20,9 @@ public class Main {
     public static final Logger LOGGER = LoggerFactory.getLogger("Launcher");
     public static final File configFile = new File("launcher.json");
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public static LauncherConfigJson config = new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT);
+    public static LauncherConfigJson config = new LauncherConfigJson(0, 0, "light");
 
     public static void main(String[] args) throws ParseException, IOException, UnsupportedLookAndFeelException {
-        MainFrame guiThreadObj = new MainFrame();
-        Thread guiThread = new Thread(guiThreadObj);
 
         LOGGER.info("Launcher Starting!");
 
@@ -51,14 +50,15 @@ public class Main {
         try {
             config = gson.fromJson(FileUtils.readFileToString(configFile, StandardCharsets.UTF_8), LauncherConfigJson.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            config = new LauncherConfigJson(0, 0, "light");
         }
         if (!configFile.exists()) {
-            LOGGER.debug("Launcher config does not exist, creating!");
-            configFile.createNewFile();
-            FileUtils.writeStringToFile(configFile, gson.toJson(new LauncherConfigJson(0, 0, LauncherConfigJson.Themes.DEFAULT)), StandardCharsets.UTF_8);
+//            LOGGER.debug("Launcher config does not exist, creating!");
+//            configFile.createNewFile();
+//            FileUtils.writeStringToFile(configFile, gson.toJson(new LauncherConfigJson(0, 0, "default")), StandardCharsets.UTF_8);
+            new FirstLaunchFrame();
         } else {
-            guiThread.start();
+            new MainFrame();
         }
     }
 }

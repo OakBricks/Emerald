@@ -35,8 +35,7 @@ public class MainFrame extends JFrame implements ActionListener, Runnable {
     Icon settingsIcon = new ImageIcon(this.getClass().getResource("/icons/03.png"));
     Image frameIcon = new ImageIcon(this.getClass().getResource("/icon.png")).getImage();
 
-    @Override
-    public void run() {
+    public MainFrame() {
         instancesPanel = new JPanel();
 
         toolBar = new JToolBar();
@@ -94,6 +93,11 @@ public class MainFrame extends JFrame implements ActionListener, Runnable {
             }
         });
         setVisible(true);
+    }
+
+    @Override
+    public void run() {
+
     }
 
     @Override

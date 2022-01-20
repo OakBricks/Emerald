@@ -18,7 +18,7 @@ public class LauncherBaseJavascriptMethods {
     public LauncherBaseJavascriptMethods() {
         engine.put("logger", Main.LOGGER);
         engine.put("DEBUGGING", Main.IS_DEBUGGING);
-        engine.put("getTheApple", getTheApple);
+        engine.put("genZLiberalTelephone5GCovidGoodQuaratineApplePhoneIPhoneWindowsBillGatesAndMore", getTheApple);
     }
 
     public void runJSCode(String code) throws Exception {

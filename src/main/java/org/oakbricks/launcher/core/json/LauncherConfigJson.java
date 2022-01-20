@@ -6,23 +6,23 @@ import org.oakbricks.launcher.gui.MainFrame;
 public class LauncherConfigJson {
     private int winX;
     private int winY;
-    private Themes launcherTheme;
+    private String launcherTheme;
     private String preferredAccount;
 
     public LauncherConfigJson() {
         winX = 0;
         winY = 0;
-        launcherTheme = Themes.DEFAULT;
+        launcherTheme = "light";
     }
 
-    public LauncherConfigJson(int winX, int winY, Themes launcherTheme, String preferredAccount) {
+    public LauncherConfigJson(int winX, int winY, String launcherTheme, String preferredAccount) {
         this.winX = winX;
         this.winY = winY;
         this.launcherTheme = launcherTheme;
         this.preferredAccount = preferredAccount;
     }
 
-    public LauncherConfigJson(int winX, int winY, Themes launcherTheme) {
+    public LauncherConfigJson(int winX, int winY, String launcherTheme) {
         this.winX = winX;
         this.winY = winY;
         this.launcherTheme = launcherTheme;
@@ -47,7 +47,7 @@ public class LauncherConfigJson {
         return winY;
     }
 
-    public Themes getLauncherTheme() {
+    public String getLauncherTheme() {
         return launcherTheme;
     }
 
@@ -55,7 +55,7 @@ public class LauncherConfigJson {
         this.preferredAccount = preferredAccount;
     }
 
-    public void setLauncherTheme(Themes launcherTheme) {
+    public void setLauncherTheme(String launcherTheme) {
         this.launcherTheme = launcherTheme;
     }
 
