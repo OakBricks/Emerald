@@ -4,14 +4,16 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-group 'org.oakbricks'
-version '0.1.0'
+group = "org.oakbricks"
+//archivesBaseName = "oaklauncher"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://oss.sonatype.org/content/groups/public/'}
-    maven { url 'https://repo.panda-lang.org/releases'}
+    maven {
+        name = "OSS Sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
 }
 
 dependencies {
@@ -21,7 +23,7 @@ dependencies {
     implementation 'org.tinylog:tinylog-api:2.4.1'
     implementation 'org.tinylog:tinylog-impl:2.4.1'
     implementation 'org.tinylog:slf4j-tinylog:2.4.1'
-    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'org.slf4j:slf4j-api:1.7.33'
     // apache commons shit we need
     implementation 'commons-cli:commons-cli:1.5.0'
     implementation 'commons-io:commons-io:2.11.0'
@@ -30,7 +32,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     // we try to get this working
-    implementation files("libs/openauth-1.1.2.jar", "libs/openauth-1.1.2-sources.jar", "libs/openauth-1.1.2-javadoc.jar", "libs/openlauncherlib-3.0.5.jar")
+    implementation 'org.to2mbn:jmcc:3.0-SNAPSHOT'
+    implementation 'org.to2mbn:jmcc-mcdownloader:3.0-SNAPSHOT'
+    implementation 'org.to2mbn:jmcc-mojang-api:3.0-SNAPSHOT'
+    implementation 'org.to2mbn:jmcc-parent:3.0-SNAPSHOT'
+    implementation 'org.to2mbn:jmcc-yggdrasil-authenticator:3.0-SNAPSHOT'
     // scripting
     implementation 'org.openjdk.nashorn:nashorn-core:15.0'
 }
