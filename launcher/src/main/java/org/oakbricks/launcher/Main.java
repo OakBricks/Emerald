@@ -1,13 +1,34 @@
 package org.oakbricks.launcher;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.qt.gui.QFont;
 import io.qt.widgets.QApplication;
 import io.qt.widgets.QMessageBox;
 import io.qt.widgets.QPushButton;
 import io.qt.widgets.QWidget;
+import org.apache.commons.io.FileUtils;
+import org.oakbricks.launcher.util.SettingsJson;
+import org.oakbricks.launcher.util.SettingsUtil;
+import org.oakbricks.launcherapi.MinecraftMetaHelpers;
+import org.tinylog.Logger;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    public static void main(String[] args) throws IOException {
+        if (!SettingsUtil.getSettingsConfigFile().exists()) {
+            Logger.info("Config file not found, creating one instead!");
+            SettingsUtil.getSettingsConfigFile().createNewFile();
+            // how the fuck is this line so fucking long
+            FileUtils.writeStringToFile(SettingsUtil.getSettingsConfigFile(), GSON.toJson(new SettingsJson(1)), StandardCharsets.UTF_8);
+        } else {
+            Logger.debug("Config found, loading as normal.");
+        }
         QApplication.initialize(args);
 
         MainWindow mainWindow = new MainWindow();

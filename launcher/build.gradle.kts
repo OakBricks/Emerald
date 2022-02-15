@@ -11,8 +11,13 @@ repositories {
 }
 
 dependencies {
+    implementation("org.tinylog:tinylog-api:2.4.1")
+    implementation("org.tinylog:tinylog-impl:2.4.1")
+    implementation("commons-io:commons-io:2.11.0")
+    implementation("com.google.code.gson:gson:2.9.0")
     implementation("io.qtjambi:qtjambi:6.2.2")
     implementation("io.qtjambi:qtjambi-native-windows-x64:6.2.2")
+    implementation(project(":api"))
 }
 
 application {

@@ -2,3 +2,10 @@
 /.gradle/
 /build/
 /.idea/
+
+# Gradle build folders
+/launcher/build
+/api/build
+
+# Config files
+/settings.json
