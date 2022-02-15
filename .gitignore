@@ -1,4 +1,5 @@
 /target
 /.idea
 /.idea/*
-/*.iml
+*.iml
+*.lock
