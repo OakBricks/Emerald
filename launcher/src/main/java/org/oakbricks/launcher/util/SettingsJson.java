@@ -3,7 +3,7 @@ package org.oakbricks.launcher.util;
 import java.nio.file.Path;
 
 public class SettingsJson {
-    public SettingsJson(int schemaVersion, Path styleSheetFile) {
+    public SettingsJson(int schemaVersion, String styleSheetFile) {
         this.schemaVersion = schemaVersion;
         this.styleSheet = styleSheetFile;
     }
@@ -13,13 +13,13 @@ public class SettingsJson {
     }
 
     public int schemaVersion;
-    public Path styleSheet;
+    public String styleSheet;
 
     public int getSchemaVersion() {
         return schemaVersion;
     }
 
-    public Path getStyleSheet() {
+    public String getStyleSheet() {
         return styleSheet;
     }
 }

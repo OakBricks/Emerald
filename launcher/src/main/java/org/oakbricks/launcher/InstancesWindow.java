@@ -1,12 +1,16 @@
 package org.oakbricks.launcher;
 
 import io.qt.widgets.*;
+import org.oakbricks.launcher.util.SettingsUtil;
 import org.oakbricks.launcherapi.MinecraftMetaHelpers;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.*;
 
 public class InstancesWindow extends QWidget {
     public InstancesWindow() throws IOException {
+        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
         setMinimumSize(400, 400);
 
         QGridLayout layout = new QGridLayout(this);
@@ -26,7 +30,7 @@ public class InstancesWindow extends QWidget {
         cancelAndCreateButtonLayout.addWidget(createInstanceButton);
         layout.addLayout(cancelAndCreateButtonLayout, 1, 0);
 
-        setWindowTitle("Create an instance");
+        setWindowTitle("Create a profile");
     }
 
     public class VanillaNewInstanceWidget extends QWidget {
@@ -42,23 +46,33 @@ public class InstancesWindow extends QWidget {
             versionList = new QListWidget();
             versionList.addItems(MinecraftMetaHelpers.getVersionsAsList());
 
+            QTableWidget versionTable = new QTableWidget();
+            versionTable.setColumnCount(2);
+            versionTable.setRowCount(MinecraftMetaHelpers.getVersions().length);
+
             formLayout.addRow("Name", nameLineEdit);
 
             layout.addLayout(formLayout.layout(), 0, 0);
             layout.addWidget(versionList);
         }
-
-        public static void debugShit(String s) {
-            System.out.println(s);
-        }
     }
 
     private class ButtonMethods {
-        public void createNewInstance() throws IOException {
+        public void createNewInstance() {
             String instanceName = VanillaNewInstanceWidget.nameLineEdit.text();
-//            System.out.println(VanillaNewInstanceWidget.nameLineEdit.text());
             if (instanceName.equals("")) {
-               new QInputDialog();
+                QMessageBox.warning(null, "Blank profile name", "Profile name MUST NOT be blank!");
+            } else {
+                // Uhhhh how tf did i manage this?
+                File instanceFolder = new File(instanceName);
+                if (instanceFolder.exists()) {
+                    QMessageBox.warning(null, "Profile already exists!", "Profile already exists!");
+                } else if (!instanceFolder.exists()) {
+                    Path basePath = Path.of(instanceName);
+                    File dotMinecraftFolder = basePath.resolve(".minecraft").toFile();
+                    File instanceInfoFile = basePath.resolve("instance.json").toFile();
+
+                }
             }
         }
     }

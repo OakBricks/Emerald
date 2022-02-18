@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class MainWindow extends QMainWindow {
     public MainWindow() throws IOException {
-//        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
+        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
         setFixedSize(400, 400);
 
         QToolBar toolBar = new QToolBar();
@@ -24,6 +24,7 @@ public class MainWindow extends QMainWindow {
 
         QPushButton settingsButton = new QPushButton("Settings");
         settingsButton.clicked.connect(new ButtonMethods(), "settingsWindow()");
+        toolBar.addWidget(settingsButton);
 
         setWindowTitle("OakLauncher");
     }
@@ -34,7 +35,8 @@ public class MainWindow extends QMainWindow {
         }
 
         public static void settingsWindow() {
-
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.show();
         }
     }
 }

@@ -9,13 +9,12 @@ import java.nio.charset.StandardCharsets;
 
 public class SettingsUtil {
     public static File settingsConfigFile = new File("settings.json");
-    public static SettingsJson settings = new SettingsJson(1);
+    public static SettingsJson settings;
 
     static {
         try {
             settings = new Gson().fromJson(FileUtils.readFileToString(settingsConfigFile, StandardCharsets.UTF_8), SettingsJson.class);
         } catch (IOException e) {
-            e.printStackTrace();
             settings = new SettingsJson(1);
         }
     }
@@ -26,13 +25,18 @@ public class SettingsUtil {
     public static File getSettingsConfigFile() {
         return settingsConfigFile;
     }
+
     public static String getStyleSheetFromConfig() throws IOException {
         String out;
-        if (!settingsConfigFile.exists()) {
+        if (!settingsConfigFile.exists() || settings.getStyleSheet() == null || settings.getStyleSheet() == "") {
             out = "";
         } else {
-            out = FileUtils.readFileToString(settings.getStyleSheet().toFile(), StandardCharsets.UTF_8);
+            out = settings.getStyleSheet();
         }
         return out;
+    }
+
+    public static void setSettings(SettingsJson settings) {
+        SettingsUtil.settings = settings;
     }
 }
