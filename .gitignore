@@ -9,3 +9,6 @@
 
 # Config files
 /settings.json
+
+# logs/dumps
+/*.log
