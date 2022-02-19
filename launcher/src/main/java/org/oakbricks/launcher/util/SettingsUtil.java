@@ -20,6 +20,14 @@ public class SettingsUtil {
     }
 
     public SettingsUtil() {
+
+    }
+
+    public static String[] getJavaEnvironmentInfo() {
+        String version = System.getProperty("java.version");
+        String vendor = System.getProperty("java.vendor");
+
+        return new String[]{version, vendor};
     }
 
     public static File getSettingsConfigFile() {

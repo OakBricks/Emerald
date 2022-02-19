@@ -62,16 +62,18 @@ public class InstancesWindow extends QWidget {
             String instanceName = VanillaNewInstanceWidget.nameLineEdit.text();
             if (instanceName.equals("")) {
                 QMessageBox.warning(null, "Blank profile name", "Profile name MUST NOT be blank!");
+                return;
             } else {
                 // Uhhhh how tf did i manage this?
                 File instanceFolder = new File(instanceName);
                 if (instanceFolder.exists()) {
                     QMessageBox.warning(null, "Profile already exists!", "Profile already exists!");
+                    return;
                 } else if (!instanceFolder.exists()) {
                     Path basePath = Path.of(instanceName);
                     File dotMinecraftFolder = basePath.resolve(".minecraft").toFile();
                     File instanceInfoFile = basePath.resolve("instance.json").toFile();
-
+                    return;
                 }
             }
         }
