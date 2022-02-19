@@ -1,16 +1,11 @@
 package org.oakbricks.launcherapi;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,42 +48,42 @@ public class MinecraftMetaHelpers {
         }
 
         class Latest {
-            static String release;
-            static String snapshot;
+            String release;
+            String snapshot;
 
-            public static String getRelease() {
+            public String getRelease() {
                 return release;
             }
 
-            public static String getSnapshot() {
+            public String getSnapshot() {
                 return snapshot;
             }
         }
 
         class Version {
             String id;
-            static String type;
-            static URL url;
-            static String time;
-            static String releaseTime;
+            String type;
+            URL url;
+            String time;
+            String releaseTime;
 
             public String getId() {
                 return id;
             }
 
-            public static String getReleaseTime() {
+            public String getReleaseTime() {
                 return releaseTime;
             }
 
-            public static String getTime() {
+            public  String getTime() {
                 return time;
             }
 
-            public static String getType() {
+            public String getType() {
                 return type;
             }
 
-            public static URL getUrl() {
+            public URL getUrl() {
                 return url;
             }
         }
