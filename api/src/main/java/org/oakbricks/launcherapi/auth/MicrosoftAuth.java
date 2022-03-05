@@ -1,13 +1,13 @@
 package org.oakbricks.launcherapi.auth;
 
-public class MicrosoftAuth {
+public class MicrosoftAuth implements BasicAuth{
+    @Override
+    public void login(String username, String password) {
 
-    /**
-     * Currently a stub in api v0
-     * @param email
-     * @param password
-     */
-    public static void loginUsingEmailAndPassword(String email, String password) {
+    }
+
+    @Override
+    public void verifyUser(String uid) {
 
     }
 }

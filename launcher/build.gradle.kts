@@ -18,7 +18,9 @@ dependencies {
     // qt stuff
     implementation("io.qtjambi:qtjambi:6.2.2")
     implementation("io.qtjambi:qtjambi-native-windows-x64:6.2.2")
+    // Api stuff
     implementation(project(":api"))
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
 }
 
 application {
