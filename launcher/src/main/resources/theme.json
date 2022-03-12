@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "themeName": "Default Theme",
+  "filesHash": {
+    "minus.png": "706c86f0b0ac3ba8c9476ee0e1050937",
+    "no.png": "4b57d074db4315f47180620829042a67",
+    "ok.png": "ed7e4508fec2658b082249be91c5a7da",
+    "plus.png": "d7e6bc1974f09d4e18c031552dcec125"
+  }
+}

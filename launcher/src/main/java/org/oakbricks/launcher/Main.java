@@ -2,7 +2,6 @@ package org.oakbricks.launcher;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.qt.widgets.QApplication;
 import org.apache.commons.io.FileUtils;
 import org.oakbricks.launcher.util.SettingsJson;
 import org.oakbricks.launcher.util.SettingsUtil;
@@ -13,8 +12,10 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+//    public final URL P = this.getClass().getResource("/icons/minus.png");
 
     public static void main(String[] args) throws IOException {
+//        System.out.println(new Main().P);
         if (!SettingsUtil.getSettingsConfigFile().exists()) {
             Logger.info("Config file not found, creating one instead!");
             SettingsUtil.getSettingsConfigFile().createNewFile();
@@ -23,11 +24,5 @@ public class Main {
         } else {
             Logger.debug("Config found, loading as normal.");
         }
-        QApplication.initialize(args);
-
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.show();
-
-        QApplication.exec();
     }
 }

@@ -1,81 +1,48 @@
 package org.oakbricks.launcher;
 
-import io.qt.widgets.*;
 import org.oakbricks.launcher.util.SettingsUtil;
 import org.oakbricks.launcherapi.MinecraftMetaHelpers;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class InstancesWindow extends QWidget {
+public class InstancesWindow extends JFrame {
     public InstancesWindow() throws IOException {
-        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
-        setMinimumSize(400, 400);
+        setMinimumSize(new Dimension(400, 400));
 
-        QGridLayout layout = new QGridLayout(this);
-        QLayout cancelAndCreateButtonLayout = new QHBoxLayout();
 
-        QTabWidget tabWidget = new QTabWidget();
-        tabWidget.addTab(new VanillaNewInstanceWidget(), "Vanilla");
+        JTabbedPane tabWidget = new JTabbedPane();
+        tabWidget.addTab("", new VanillaNewInstanceWidget());
 
-        QPushButton createInstanceButton = new QPushButton("Create");
-        createInstanceButton.clicked.connect(new ButtonMethods(), "createNewInstance()");
+        JButton createInstanceButton = new JButton("Create");
 
-        QPushButton cancelButton = new QPushButton("Cancel");
+        JButton cancelButton = new JButton("Cancel");
 
-        layout.addWidget(tabWidget, 0, 0);
-        // Cancel and create buttons
-        cancelAndCreateButtonLayout.addWidget(cancelButton);
-        cancelAndCreateButtonLayout.addWidget(createInstanceButton);
-        layout.addLayout(cancelAndCreateButtonLayout, 1, 0);
-
-        setWindowTitle("Create a profile");
+        setTitle("Create a profile");
     }
 
-    public class VanillaNewInstanceWidget extends QWidget {
-        public static QLineEdit nameLineEdit;
-        public static QListWidget versionList;
+    public class VanillaNewInstanceWidget extends JFrame {
+        public static JTextField nameLineEdit;
+        public static JList versionList;
 
         public VanillaNewInstanceWidget() throws IOException {
-            QGridLayout layout = new QGridLayout(this);
-            QFormLayout formLayout = new QFormLayout();
 
-            nameLineEdit = new QLineEdit();
+            nameLineEdit = new JTextField();
 
-            versionList = new QListWidget();
-            versionList.addItems(MinecraftMetaHelpers.getVersionsAsList());
+            versionList = new JList();
+//            versionList.add(MinecraftMetaHelpers.getVersionsAsList());
 
-            QTableWidget versionTable = new QTableWidget();
-            versionTable.setColumnCount(2);
-            versionTable.setRowCount(MinecraftMetaHelpers.getVersions().length);
+//            JTable versionTable = new JTable();
+//            versionTable.setColumnCount(2);
+//            versionTable.setRowCount(MinecraftMetaHelpers.getVersions().length);
 
-            formLayout.addRow("Name", nameLineEdit);
+//            formLayout.addRow("Name", nameLineEdit);
 
-            layout.addLayout(formLayout.layout(), 0, 0);
-            layout.addWidget(versionList);
-        }
-    }
-
-    private class ButtonMethods {
-        public void createNewInstance() {
-            String instanceName = VanillaNewInstanceWidget.nameLineEdit.text();
-            if (instanceName.equals("")) {
-                QMessageBox.warning(null, "Blank profile name", "Profile name MUST NOT be blank!");
-                return;
-            } else {
-                // Uhhhh how tf did i manage this?
-                File instanceFolder = new File(instanceName);
-                if (instanceFolder.exists()) {
-                    QMessageBox.warning(null, "Profile already exists!", "Profile already exists!");
-                    return;
-                } else if (!instanceFolder.exists()) {
-                    Path basePath = Path.of(instanceName);
-                    File dotMinecraftFolder = basePath.resolve(".minecraft").toFile();
-                    File instanceInfoFile = basePath.resolve("instance.json").toFile();
-                    return;
-                }
-            }
+//            layout.addLayout(formLayout.layout(), 0, 0);
+//            layout.addWidget(versionList);
         }
     }
 }

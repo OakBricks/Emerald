@@ -1,29 +1,30 @@
 package org.oakbricks.launcher;
 
-import io.qt.widgets.QMainWindow;
-import io.qt.widgets.QPushButton;
-import io.qt.widgets.QToolBar;
-import org.oakbricks.launcher.util.SettingsUtil;
-
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
-public class MainWindow extends QMainWindow {
+public class MainWindow extends JFrame {
+    JToolBar toolBar;
+    GridBagLayout gridBagLayout;
+
     public MainWindow() throws IOException {
-        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
-        setFixedSize(400, 400);
+        gridBagLayout = new GridBagLayout();
 
-        QToolBar toolBar = new QToolBar();
-        toolBar.setMovable(false);
-        addToolBar(toolBar);
+        setMinimumSize(new Dimension(400, 400));
+        setLayout(gridBagLayout);
 
-        QPushButton instanceButton = new QPushButton("Add Profiles");
-        instanceButton.clicked.connect(new InstancesWindow(), "show()");
-        toolBar.addWidget(instanceButton);
+        toolBar = new JToolBar();
 
-        QPushButton settingsButton = new QPushButton("Settings");
-        settingsButton.clicked.connect(new SettingsWindow(), "show()");
-        toolBar.addWidget(settingsButton);
+        JButton instanceButton = new JButton("Add Profiles");
+        toolBar.add(instanceButton);
 
-        setWindowTitle("OakLauncher");
+        JButton settingsButton = new JButton("Settings");
+        toolBar.add(settingsButton);
+
+        JList profilesListView = new JList();
+
+
+        setTitle("OakLauncher");
     }
 }
