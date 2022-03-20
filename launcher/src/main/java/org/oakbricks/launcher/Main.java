@@ -7,15 +7,16 @@ import org.oakbricks.launcher.util.SettingsJson;
 import org.oakbricks.launcher.util.SettingsUtil;
 import org.tinylog.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 //    public final URL P = this.getClass().getResource("/icons/minus.png");
+    public static File profilesFolder = new File("profiles");
 
     public static void main(String[] args) throws IOException {
-//        System.out.println(new Main().P);
         if (!SettingsUtil.getSettingsConfigFile().exists()) {
             Logger.info("Config file not found, creating one instead!");
             SettingsUtil.getSettingsConfigFile().createNewFile();
@@ -24,5 +25,9 @@ public class Main {
         } else {
             Logger.debug("Config found, loading as normal.");
         }
+
+        profilesFolder.mkdirs();
+
+        new MainWindow();
     }
 }

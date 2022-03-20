@@ -2,29 +2,36 @@ package org.oakbricks.launcher;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainWindow extends JFrame {
-    JToolBar toolBar;
-    GridBagLayout gridBagLayout;
+public class MainWindow extends JFrame implements ActionListener {
+    JMenuBar menuBar;
+    JButton profileButton;
+    BoxLayout instancesLayout;
+    JList instancesList;
+    Object[] instancesArray;
 
-    public MainWindow() throws IOException {
-        gridBagLayout = new GridBagLayout();
+    public MainWindow() {
+        instancesArray = Main.profilesFolder.listFiles();
+        profileButton = new JButton("Add Profile");
 
-        setMinimumSize(new Dimension(400, 400));
-        setLayout(gridBagLayout);
+        menuBar = new JMenuBar();
+        menuBar.add(profileButton);
+        add(menuBar);
 
-        toolBar = new JToolBar();
+        instancesList = new JList(instancesArray);
 
-        JButton instanceButton = new JButton("Add Profiles");
-        toolBar.add(instanceButton);
+        add(instancesList);
 
-        JButton settingsButton = new JButton("Settings");
-        toolBar.add(settingsButton);
+        setJMenuBar(menuBar);
+        setMinimumSize(new Dimension(800, 600));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 
-        JList profilesListView = new JList();
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-
-        setTitle("OakLauncher");
     }
 }
