@@ -1,7 +1,7 @@
 # Contributing to OakLauncher
 
 ## Commit notes
-Every commit must be prefixed with the following
+Every commit (or pull request) must be prefixed with the following
 
 | Prefix | Usage                                                                                                                                        |
 |--------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -14,27 +14,30 @@ Every commit must be prefixed with the following
 
 ## Code format
 Code must
-- be valid for java 17
-- be stable and mostly reliable
-- be readable
-- and adhere to [java conventions](https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
-- useless unused methods, fields, and classes must provide some function that could be used by another project, if not used by OakLauncher
+- be valid in java 17 (compatibility with earlier java versions is better, but not required)
+- be somewhat stable and mostly reliable (no huge bugs)
+- be mostly readable
+- adhere to most or all of the [java conventions](https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
+- have all functions, fields, variables, etc have a use outside or inside of OakLauncher and related projects
+
+## Code formatting
 
 Good code formatting:
 ```java
 package org.oakbricks.launcher;
 
+// Any words in class names must be capitalized
 public class HelloWorld {
     // Spaces before comments
     public static void main() {
         // No line escapes after a method name
         Logger.info("Hello World");
-        // Make sure to use a Logger for long-term logging, System.out is allowed for temporary debugging
+        // Make sure to use a Logger for any kind of logging that is meant to be shown in a stable release, or even a snapshot (any build from CI), but System.out is allowed for temporary debugging
     }
     
     // Names adhere to java standards
     public int exampleInt() {
-        // I prefer if variable and field names are more than one character,
+        // I prefer if any variable names are more than one character,
         // but this is fine.
         int i = 0;
         return i++;
@@ -53,7 +56,7 @@ public class helloworld
     // There is so much wrong with this, how can I even begin
 public void Main(int _a /*important number*/, example_class b)
     {
-        while (true) {
+        while (i >= 15) {
             _a++;
             System.out.println(_a);
         }
