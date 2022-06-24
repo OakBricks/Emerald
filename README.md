@@ -1,11 +1,12 @@
-# OakLauncher
-###### *Oh shit, here we go again*
+# Emerald Launcher
+#### Yet another minecraft launcher
 
-## Why?
-The original launcher (As seen in `master`) was getting too hard to maintain,
-so I redid the launcher now in QtJambi and with as little dependencies as possible.
+---
 
-## Features checklist
+## Why the new name????
+Blame my lazy naming scheme (working on android launcher right now)
+
+## Todo list
 - [ ] Launching (Library)
 - [ ] Auth (Library)
 - [ ] Profiles

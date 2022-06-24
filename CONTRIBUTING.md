@@ -23,8 +23,9 @@ Code must
 ## Code formatting
 
 Good code formatting:
+
 ```java
-package org.oakbricks.launcher;
+package org.oakbricks.emerald;
 
 // Any words in class names must be capitalized
 public class HelloWorld {
@@ -34,7 +35,7 @@ public class HelloWorld {
         Logger.info("Hello World");
         // Make sure to use a Logger for any kind of logging that is meant to be shown in a stable release, or even a snapshot (any build from CI), but System.out is allowed for temporary debugging
     }
-    
+
     // Names adhere to java standards
     public int exampleInt() {
         // I prefer if any variable names are more than one character,
@@ -47,7 +48,7 @@ public class HelloWorld {
 
 Bad code formatting:
 ```java
-// Holy fuck, please don't introduce grammatically correct packages, and don't mention GUI in the package where the Main class is (org.oakbricks.launcher)
+// Holy fuck, please don't introduce grammatically correct packages, and don't mention GUI in the package where the Main class is (org.oakbricks.emerald)
 package Org.OakBricks.LauncherGUI;
 
 // For the love of god don't do this C-style, why is this even valid java
