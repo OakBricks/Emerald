@@ -63,7 +63,7 @@ public void Main(int _a /*important number*/, example_class b)
         }
 }
     
-    // Methods cannot be public if they are not used for frontend utilities!
+    // Methods cannot be public if they are not used for basic utilities used by most classes!
     // Also names MUST follow java naming conventions!
     public static void InternalMethod(int i, String s) {
         i = s.hashCode();
