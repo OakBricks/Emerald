@@ -6,21 +6,5 @@
 }
 
 body {
-  margin: auto;
   font-family: 'Roboto', sans-serif;
-}
-
-.fakeWindow {
-  border-radius: 4px;
-  background: darkgray;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-}
-
-.fakeWindowTitleBar {
-  background: white;
-  
 }

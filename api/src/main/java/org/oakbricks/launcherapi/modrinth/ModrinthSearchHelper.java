@@ -23,18 +23,6 @@ public class ModrinthSearchHelper {
         return out;
     }
 
-//    public static String testModrinthApi() throws IOException {
-//        String out;
-//
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder().url("https://api.modrinth.com/").build();
-//        Response response = client.newCall(request).execute();
-//        out = response.body().string();
-//        response.close();
-//
-//        return out;
-//    }
-
     private static String directSearch(String query, String index, String limit, String facets) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
