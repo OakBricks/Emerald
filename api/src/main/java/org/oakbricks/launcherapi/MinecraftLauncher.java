@@ -1,13 +1,13 @@
 package org.oakbricks.launcherapi;
 
-public class MinecraftLaunch {
+public class MinecraftLauncher {
     String minecraftVersion;
     String instanceName;
-    public MinecraftLaunch(String version) {
+    public MinecraftLauncher(String version) {
         minecraftVersion = version;
     }
 
-    public static void launchMinecraft() {
+    public void launchMinecraft() {
         
     }
 }
