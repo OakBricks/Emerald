@@ -1,4 +1,4 @@
-package org.oakbricks.launcher;
+package org.oakbricks.emerald;
 
 import io.qt.widgets.*;
 
@@ -17,7 +17,7 @@ public class SettingsWindow extends QWidget {
         setWindowTitle("Settings");
     }
 
-    private class JavaSettings extends QWidget {
+    private static class JavaSettings extends QWidget {
         public JavaSettings() {
             QLineEdit javaPath = new QLineEdit();
             QPushButton b1 = new QPushButton("Look for JRE/JDK");
@@ -25,7 +25,7 @@ public class SettingsWindow extends QWidget {
         }
     }
 
-    private class AccountSettings extends QWidget {
+    private static class AccountSettings extends QWidget {
         public AccountSettings() {
             QGridLayout grid = new QGridLayout();
             QListWidget accountList = new QListWidget();
@@ -40,7 +40,7 @@ public class SettingsWindow extends QWidget {
             setLayout(grid);
         }
 
-        class LoginThingy extends QWidget{
+        static class LoginThingy extends QWidget{
             public LoginThingy() {
                 QGridLayout grid = new QGridLayout();
                 QFormLayout formLayout = new QFormLayout();

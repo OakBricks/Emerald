@@ -1,7 +1,7 @@
-package org.oakbricks.launcher;
+package org.oakbricks.emerald;
 
 import io.qt.widgets.*;
-import org.oakbricks.launcher.util.SettingsUtil;
+import org.oakbricks.emerald.util.settings.SettingsUtil;
 import org.oakbricks.launcherapi.MinecraftMetaHelpers;
 
 import java.io.File;
@@ -10,7 +10,7 @@ import java.nio.file.*;
 
 public class InstancesWindow extends QWidget {
     public InstancesWindow() throws IOException {
-        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
+//        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
         setMinimumSize(400, 400);
 
         QGridLayout layout = new QGridLayout(this);
@@ -33,7 +33,7 @@ public class InstancesWindow extends QWidget {
         setWindowTitle("Create a profile");
     }
 
-    public class VanillaNewInstanceWidget extends QWidget {
+    public static class VanillaNewInstanceWidget extends QWidget {
         public static QLineEdit nameLineEdit;
         public static QListWidget versionList;
 

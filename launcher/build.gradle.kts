@@ -16,13 +16,13 @@ dependencies {
     implementation("commons-io:commons-io:2.11.0")
     implementation("com.google.code.gson:gson:2.9.0")
     // qt stuff
-    implementation("io.qtjambi:qtjambi:6.2.2")
-    implementation("io.qtjambi:qtjambi-native-windows-x64:6.2.2")
+    implementation("io.qtjambi:qtjambi:6.3.1")
+    implementation("io.qtjambi:qtjambi-native-windows-x64:6.3.1")
     // Api stuff
     implementation(project(":api"))
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
 
 application {
-    mainClass.set("org.oakbricks.launcher.Main")
+    mainClass.set("org.oakbricks.emerald.Main")
 }
