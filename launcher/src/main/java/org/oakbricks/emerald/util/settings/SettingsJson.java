@@ -1,9 +1,8 @@
 package org.oakbricks.emerald.util.settings;
 
 public class SettingsJson {
-    public SettingsJson(int settingsVersion, String styleSheetFile, String launcherUID) {
+    public SettingsJson(int settingsVersion, String launcherUID) {
         this.settingsVersion = settingsVersion;
-        this.styleSheet = styleSheetFile;
         this.launcherUID = launcherUID;
     }
 
@@ -12,15 +11,10 @@ public class SettingsJson {
     }
 
     public int settingsVersion;
-    public String styleSheet;
     public String launcherUID;
     public String microsoftClientID;
 
     public int getSettingsJsonVersion() {
         return settingsVersion;
-    }
-
-    public String getStyleSheet() {
-        return styleSheet;
     }
 }

@@ -1,7 +1,6 @@
 package org.oakbricks.emerald;
 
 import io.qt.widgets.*;
-import org.oakbricks.emerald.util.settings.SettingsUtil;
 import org.oakbricks.launcherapi.MinecraftMetaHelpers;
 
 import java.io.File;
@@ -10,7 +9,6 @@ import java.nio.file.*;
 
 public class InstancesWindow extends QWidget {
     public InstancesWindow() throws IOException {
-//        setStyleSheet(SettingsUtil.getStyleSheetFromConfig());
         setMinimumSize(400, 400);
 
         QGridLayout layout = new QGridLayout(this);
@@ -57,23 +55,20 @@ public class InstancesWindow extends QWidget {
         }
     }
 
-    private class ButtonMethods {
+    private static class ButtonMethods {
         public void createNewInstance() {
             String instanceName = VanillaNewInstanceWidget.nameLineEdit.text();
             if (instanceName.equals("")) {
                 QMessageBox.warning(null, "Blank profile name", "Profile name MUST NOT be blank!");
-                return;
             } else {
                 // Uhhhh how tf did i manage this?
                 File instanceFolder = new File(instanceName);
                 if (instanceFolder.exists()) {
                     QMessageBox.warning(null, "Profile already exists!", "Profile already exists!");
-                    return;
                 } else if (!instanceFolder.exists()) {
                     Path basePath = Path.of(instanceName);
                     File dotMinecraftFolder = basePath.resolve(".minecraft").toFile();
                     File instanceInfoFile = basePath.resolve("instance.json").toFile();
-                    return;
                 }
             }
         }

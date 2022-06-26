@@ -35,16 +35,6 @@ public class SettingsUtil {
         return settingsConfigFile;
     }
 
-    public static String getStyleSheetFromConfig() {
-        String out;
-        if (!settingsConfigFile.exists() || settings.getStyleSheet().equals("") || settings.getStyleSheet() == null) {
-            out = "";
-        } else {
-            out = settings.getStyleSheet();
-        }
-        return out;
-    }
-
     public static void validateConfig() {
         SettingsJson config = settings;
         if (config.settingsVersion != currentConfigVersion) {
