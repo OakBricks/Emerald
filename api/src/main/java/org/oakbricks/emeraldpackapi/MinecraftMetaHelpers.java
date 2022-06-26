@@ -1,4 +1,4 @@
-package org.oakbricks.launcherapi;
+package org.oakbricks.emeraldpackapi;
 
 import com.google.gson.Gson;
 

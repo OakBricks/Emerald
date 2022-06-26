@@ -15,14 +15,11 @@ dependencies {
     implementation("org.tinylog:tinylog-impl:2.4.1")
     implementation("commons-io:commons-io:2.11.0")
     implementation("com.google.code.gson:gson:2.9.0")
-    // qt stuff
-    implementation("io.qtjambi:qtjambi:6.3.1")
-    implementation("io.qtjambi:qtjambi-native-windows-x64:6.3.1")
     // Api stuff
     implementation(project(":api"))
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
 
 application {
-    mainClass.set("org.oakbricks.emerald.Main")
+    mainClass.set("org.oakbricks.emeraldpackman.Main")
 }
